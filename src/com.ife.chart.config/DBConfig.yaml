@@ -1,0 +1,16 @@
+# Archivo de configuración para el acceso
+# al dbf y demas base de datos involucrada.
+# @author Angel Barrientos Cruz <uetiko@gmail.com>
+# @package com.ife.chart.config
+
+#dbf
+xbase:
+  path: ../com.ife.chart.xbases/
+  name: base
+#Base postgres
+base:
+  usuario : postgres
+  passwd : 000999000
+  host : 127.0.0.1
+  puerto : 5555
+  base : interstella
