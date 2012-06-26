@@ -1,5 +1,6 @@
 /**
- * @author Angel Barrientos
+ * @author Angel Barrientos uetiko@gmail.com
+ * 
  */
 
 function initEvents() {
@@ -8,7 +9,7 @@ function initEvents() {
 	//chart();
 }
 
-function chart(pais, num) {
+function Chart(pais, num) {
 	var paises = new String();
 	var numbers;
 	var numeros = JSON.stringify(num);
@@ -33,9 +34,9 @@ function chart(pais, num) {
 			nombreGrafica : "Mexicanos en el mundo",
 			subnombre : "Número de mexicanos",
 			categories : [pais[0], pais[1], pais[3], pais[4], pais[5], pais[6], pais[7], pais[8], pais[9], pais[10], pais[11], pais[12], pais[13], pais[14], pais[15], pais[16], pais[17], pais[18], pais[19], pais[20], pais[21], pais[22], pais[23], pais[24], pais[25], pais[26], pais[27], pais[28], pais[29], pais[30]],
-			ejeYTitulo : "Tiempo",
-			unidadesY : 'horas',
-			ejeXTitulo : "Menciones",
+			ejeYTitulo : "Lineas",
+			unidadesY : 'Ciudadanos',
+			ejeXTitulo : "Columnas",
 			unidadesX : 'Ciudadanos',
 			valores1 : {
 				nombre : "Ciudadanos",
@@ -44,17 +45,18 @@ function chart(pais, num) {
 			valores2 : {
 				nombre : "undef",
 				datos : [num[0], num[1], num[2], num[3], num[4], num[5], num[6], num[7], num[8], num[9], num[10], num[11], num[12], num[13], num[14], num[15], num[16], num[17], num[18], num[19], num[20], num[21], num[22], num[23], num[24], num[25], num[26], num[27], num[28], num[29], num[30]]
-			}
+			},
+			totalCiudadanos : "Total de ciudadanos en este pais"
 		}
 	}
 	var jsonVar;
 	var totalMencion = 0;
 	var totalTiempo = 0;
 	var tmp = datos.reporte;
-	var size = datos.reporte.valores1.datos[0].length;
+	var size = datos.reporte.valores1.datos.length;
 	for ( var i = 0; i < size; i++) {
-		totalMencion = totalMencion + parseInt(datos.reporte.valores1.datos[0][i]);
-		totalTiempo = totalTiempo + parseInt(datos.reporte.valores2.datos[0][i]);
+		totalMencion = totalMencion + parseInt(datos.reporte.valores1.datos[i]);
+		totalTiempo = totalTiempo + parseInt(datos.reporte.valores2.datos[i]);
 	}
 
 	chart = new Highcharts.Chart(
@@ -67,23 +69,17 @@ function chart(pais, num) {
 					text : tmp.nombreGrafica
 				},
 				subtitle : {
-					text : tmp.ejeXTitulo + ': ' + totalMencion + ' | '
-							+ tmp.ejeYTitulo + ': ' + totalTiempo,
+					text : tmp.totalCiudadanos + ': ' + totalMencion,
 					style : {
-						color : '#2fac66'
+						color : '#b25c3f'
 					}
 				},
-
 				xAxis : [ {
 					categories : tmp.categories
 				} ],
 				labels: {
                     rotation: -45,
-                    align: 'right',
-                    style: {
-                        fontSize: '13px',
-                        fontFamily: 'Verdana, sans-serif'
-                    }
+                    align: 'right'
                 },
 				yAxis : [ { // Primary yAxis
 					labels : {
@@ -91,20 +87,20 @@ function chart(pais, num) {
 							return this.value + ' ' + tmp.unidadesY;
 						},
 						style : {
-							color : '#2fac66'
+							color : '#6c6d6d'
 						}
 					},
 					title : {
 						text : tmp.ejeYTitulo,
 						style : {
-							color : '#2fac66'
+							color : '#982117'
 						}
 					}
 				}, { // Secondary yAxis
 					title : {
 						text : tmp.ejeXTitulo,
 						style : {
-							color : '#a3195b'
+							color : '#982117'
 						}
 					},
 					labels : {
@@ -112,7 +108,7 @@ function chart(pais, num) {
 							return this.value + ' ' + tmp.unidadesX;
 						},
 						style : {
-							color : '#a3195b'
+							color : '#6c6d6d'
 						}
 					},
 					opposite : true
@@ -124,13 +120,13 @@ function chart(pais, num) {
 					},
 					backgroundColor : {
 						linearGradient : [ 0, 0, 0, 60 ],
-						stops : [ [ 0, '#b2b2b2' ], [ 1, '#dad8fe' ] ]
+						stops : [ [ 0, '#FFFFFF' ], [ 1, '#d4aab9' ] ]
 					},
 					borderWidth : 1,
 					borderColor : '#AAA',
 					shadow : true,
 					style : {
-						color : '#000000',
+						color : '#69696a',
 						fontSize : '9pt',
 						padding : '5px'
 					}
@@ -160,14 +156,14 @@ function chart(pais, num) {
 				},
 				series : [ {
 					name : tmp.ejeXTitulo,
-					color : '#a3195b',
+					color : '#66263d',
 					type : 'column',
 					stack : 'partidos',
 					yAxis : 1,
 					data : tmp.valores1.datos
 				}, {
 					name : tmp.ejeYTitulo,
-					color : '#2fac66',
+					color : '#bf7548',
 					type : 'spline',
 					stack : 'tiempos',
 					data : tmp.valores2.datos
@@ -205,7 +201,7 @@ function cmpChange() {
 					num[int] = parseInt(response.numeros[int]);
 					
 				}
-				chart(keyEstado, num);
+				Chart(keyEstado, num);
 				
 				
 			},
