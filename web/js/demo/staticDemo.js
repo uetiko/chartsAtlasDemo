@@ -15,7 +15,7 @@ function chart() {
 			categories : ["Aguascalientes","Baja California","Baja California Sur","Campeche","Chiapas"],
 			ejeYTitulo : "Tiempo",
 			unidadesY : 'horas',
-			ejeXTitulo : "Menciones",
+			ejeXTitulo : "Número de ciudadanos",
 			unidadesX : 'Ciudadanos',
 			valores1 : {
 				nombre : "Ciudadanos",
@@ -50,7 +50,7 @@ function chart() {
 					text : tmp.ejeXTitulo + ': ' + totalMencion + ' | '
 							+ tmp.ejeYTitulo + ': ' + totalTiempo,
 					style : {
-						color : '#2fac66'
+						color : '#b25c3f'
 					}
 				},
 
@@ -71,20 +71,20 @@ function chart() {
 							return this.value + ' ' + tmp.unidadesY;
 						},
 						style : {
-							color : '#2fac66'
+							color : '#6c6d6d'
 						}
 					},
 					title : {
 						text : tmp.ejeYTitulo,
 						style : {
-							color : '#2fac66'
+							color : '#982117'
 						}
 					}
 				}, { // Secondary yAxis
 					title : {
 						text : tmp.ejeXTitulo,
 						style : {
-							color : '#a3195b'
+							color : '#982117'
 						}
 					},
 					labels : {
@@ -92,7 +92,7 @@ function chart() {
 							return this.value + ' ' + tmp.unidadesX;
 						},
 						style : {
-							color : '#a3195b'
+							color : '#6c6d6d'
 						}
 					},
 					opposite : true
@@ -104,13 +104,13 @@ function chart() {
 					},
 					backgroundColor : {
 						linearGradient : [ 0, 0, 0, 60 ],
-						stops : [ [ 0, '#b2b2b2' ], [ 1, '#dad8fe' ] ]
+						stops : [ [ 0, '#FFFFFF' ], [ 1, '#d4aab9' ] ]
 					},
 					borderWidth : 1,
 					borderColor : '#AAA',
 					shadow : true,
 					style : {
-						color : '#000000',
+						color : '#69696a',
 						fontSize : '9pt',
 						padding : '5px'
 					}
@@ -140,14 +140,14 @@ function chart() {
 				},
 				series : [ {
 					name : tmp.ejeXTitulo,
-					color : '#a3195b',
+					color : '#66263d',
 					type : 'column',
 					stack : 'partidos',
 					yAxis : 1,
 					data : tmp.valores1.datos
 				}, {
 					name : tmp.ejeYTitulo,
-					color : '#2fac66',
+					color : '#bf7548',
 					type : 'spline',
 					stack : 'tiempos',
 					data : tmp.valores2.datos
@@ -252,14 +252,14 @@ Highcharts.theme = {
       borderColor: '#FFFFFF',
       borderWidth: 0,
       className: 'dark-container',
-      plotBackgroundColor: '#b2b2b2',
+      plotBackgroundColor: '#cccccc',
       plotBorderColor: '#FFFFFF',
       plotBorderWidth: 1,
       plotShadow: true
    },
    title: {
       style: {
-         color: '#FFFFFF',
+         color: '#8b2436',
          font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
       }
    },
@@ -331,7 +331,7 @@ Highcharts.theme = {
       },
       spline: {
          marker: {
-            lineColor: '#333'
+            lineColor: '#FFFFFF'
          }
       },
       scatter: {
@@ -345,7 +345,7 @@ Highcharts.theme = {
    },      
    legend: {
       itemStyle: {
-         color: '#CCC'
+         color: '#e4e4e4'
       },
       itemHoverStyle: {
          color: '#FFF'
@@ -356,7 +356,7 @@ Highcharts.theme = {
    },
    credits: {
       style: {
-         color: '#666'
+         color: '#FFFFFF'
       }
    },
    labels: {
@@ -489,7 +489,7 @@ Highcharts.theme = {
    // special colors for some of the
    legendBackgroundColor: 'rgba(0, 0, 0, 0.5)',
    legendBackgroundColorSolid: 'rgb(35, 35, 70)',
-   dataLabelsColor: '#444',
+   dataLabelsColor: '#ffffff',
    textColor: '#C0C0C0',
    maskColor: 'rgba(255,255,255,0.3)'
 };
