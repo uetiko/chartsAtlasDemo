@@ -4,9 +4,17 @@
  */
 
 function initEvents() {
+	getInfoBrowser()
 	setPaisCombo();
 	cmpChange();
 	//chart();
+}
+
+function getInfoBrowser(){
+	var ua = $.browser;
+	  if ( ua.mozilla && ua.version.slice(0,3) == "1.9" ) {
+	    alert( "Do stuff for firefox 3" );
+	  }
 }
 
 function Chart(pais, num) {
@@ -223,11 +231,12 @@ function setPaisCombo(){
 		},
 		success : function(response, textStatus, jqXHR) {
 			var paisCmb = $("select#paisCmb");
+			paisCmb.hide();
 			paisCmb.append(new Option("Selecciona un país"));
 			for(var i = 0; i < response.length; i++){
 				paisCmb.append(new Option(response[i].nombre, response[i].idPais));
 			}
-			
+			paisCmb.show();
 		},
 		error : function(response, textStatus, jqXHR) {
 			alert(textStatus);
@@ -236,15 +245,6 @@ function setPaisCombo(){
 	
 	
 }
-
-
-
-
-
-
-
-
-
 
 /**
  * Dark blue theme for Highcharts JS
