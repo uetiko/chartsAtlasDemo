@@ -1,0 +1,214 @@
+/* CSS Document */
+
+/*PAGE LAYOUT*/
+body {
+	background-image: url(bg_body.gif);
+	background-repeat: repeat-x;
+	margin: 0px;
+}
+#toppage{
+	width:1020px;
+}
+#date{
+	float:left; width:195px; height:39px; border-bottom:solid 1px #999999; border-right:solid 1px #999999;
+	left: auto;
+    position: relative;
+}
+#topbar{
+	float:left; 
+	width:823px; 
+	height:40px; 
+	background-image:url(bg_topbar.gif);
+	background-color:#CBC55C;
+	background-repeat:repeat-x;
+	border-right:solid 1px #999999;
+	left: auto;
+    position: relative;
+}
+#header{
+	width:1020px;
+}
+#content{
+	width:1020px;
+}
+#contenttext{
+	float:left; width:1017px; 
+	background-color:#FFFFFF; 
+	border-left:solid 1px #999999; border-right:solid 1px #999999; 
+	border-bottom:solid 1px #999999; border-top:dotted 1px #CCCCCC; 
+	min-height:360px;
+	position:relative;
+	left:auto;
+	
+}
+#logo{
+	float:left; width:194px; height:110px; background-color:#F7F7F7; border-left:solid 1px #999999;
+	left: auto;
+    position: relative;
+	background-image: url(fnd_logo.png);
+	background-repeat:no-repeat;
+	background-position: center;
+	position:relative;
+}
+#pagetitle{
+	position:relative; float:left; width:823px; height:110px; background-color:#F7F7F7; border-right:solid 1px #999999;
+	background-image:url(atlas.png); background-repeat:no-repeat;
+	left:auto;
+}
+#title{
+	position:absolute; right:10px; bottom:0px; width:600px;
+}
+#menu{
+	float:left; width:140px; margin:0px;
+	background-color: #A26262;
+}
+.menu_s {
+    height: 8px;
+    left: -14.1px;
+    position: relative;
+    width: 156px;
+	}
+#footer{
+	width:590px; 
+	padding-right:auto; 
+	padding-left:auto;
+	padding-bottom:30px;
+	font-size: 10px;
+    font-weight: normal;
+}
+
+/*GRAY PANEL*/
+.panel{
+	padding-bottom: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+	border:solid 1px #E4E4E4;
+	background-color:#EEEEEE;
+	margin-top: 10px;
+	width:970px;
+	text-align:center;
+}
+
+/*TEXT STYLES*/
+.bodytext {
+	font: 13px Verdana, Geneva, sans-serif;
+	color: #666666;
+	padding-left: 14px;
+	padding-bottom: 14px;
+	text-align:justify;
+	padding-right:14px;
+}
+.smalltext {
+	font: 0.7em Verdana, Geneva, sans-serif;
+	font-size: 10px;
+	color: #979595;
+	padding: 13px;
+}
+.smallwhitetext {
+	font: 0.7em Tahoma, sans-serif;
+	font-size: 11px;
+	font-weight:bold;
+	color: #FFFFFF;
+}
+.smallwhitetext a{
+	font: 0.7em Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	font-weight:bold;
+	color: #FFFFFF;
+	text-decoration:none;
+}
+.smallwhitetext a:hover{
+	text-decoration:underline;
+}
+.smallgraytext {
+	font: 0.7em Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	font-weight:bold;
+	color:#b0afaf;
+}
+.smallgraytext a{
+	font: 0.7em Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	font-weight:bold;
+	color:#b0afaf;
+	text-decoration:none;
+}
+.smallgraytext a:hover{
+	text-decoration:underline;
+}
+.titletext {
+	font: 0.7em Tahoma, sans-serif;
+	font-size:30px;
+	font-weight:bold;
+	color: #CCCCCC;
+}
+.logotext {
+	font: 0.7em Tahoma, sans-serif;
+	font-size:28px;
+	font-weight:bold;
+	color: #878787;
+	margin-top: -15px;
+}
+.colorlogotext {
+	font: 0.7em Tahoma, sans-serif;
+	font-size:36px;
+	font-weight:bold;
+	color:#800014;
+}
+.titulos {
+	font: 16px Verdana, Geneva, sans-serif;
+	font-weight:normal;
+	color:#B06D44;
+	text-align:left;
+    padding-top: 6px;
+}
+#linksmenu li a{
+	float:right; 
+	width:140px; 
+	height:35px; 
+	background-color:#A26262; 
+	border-left:solid 1px #FFFFFF; 
+	border-bottom:solid 1px #FFFFFF;
+	font: 10.5px Tahoma, sans-serif;
+	font-weight:bold;
+	color: #FFFFFF;
+	text-decoration:none;
+	padding-top:2px;
+	vertical-align:middle;
+	position:relative;
+	top:-15px;
+}
+#linksmenu a:hover{
+	background-color:#7e3838;
+	color:#FFFFFF;
+}
+#linksmenu li ul li a{
+	width:130px; 
+	height:15px; 
+	padding-left:10px;
+	background-color:#FFFFFF;  
+	font: 10px normal Tahoma, sans-serif;
+	color: #454445;
+	text-decoration:none;
+	vertical-align:middle;
+	text-align:left;
+}
+#linksmenu li ul li a:hover{
+	background-color:#f7f6f6;
+	color:#000000;
+	font-weight:normal;
+	text-align:left;
+}
+ul.menu
+{
+   list-style:none;
+}
+ul.menu ul 
+{
+   display:none;
+   list-style:none;
+} 
+ul.menu li:hover > ul
+{
+   display:block;
+}
