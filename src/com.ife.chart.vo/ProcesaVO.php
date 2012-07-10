@@ -1,8 +1,14 @@
 <?php
 include_once '../com.ife.chart.dao/ReadDBFDAO.php';
+include_once '../com.ife.chart.dao/QueryDAO.php';
 
 /**
- *
+ * Clase de VO para el procesamiento de datos comunes
+ * @version 0.1
+ * @author Angel Barrientos Cruz <uetiko@gmail.com>
+ * @package com.ife.chart.vo
+ * @license http://www.gnu.org/copyleft/lesser.html Distributed under the Lesser General Public License (LGPL)
+ * @copyright 2012
  */
 class ProcesaVO {
 
@@ -60,6 +66,18 @@ class ProcesaVO {
         }
         return $datos;
     }
-
+    
+    public function procesaLinkMap(){
+        $dao = new QueryDAO();
+        $links = $dao->getLinks();
+        $data = array();
+        foreach ($links as $key) {
+            if($key['nombreCorto'] == 'mapguide'){
+                $data[] = $key;
+                break;
+            }
+        }
+        return $data;
+    }
 }
 ?>
