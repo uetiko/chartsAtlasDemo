@@ -10,9 +10,13 @@ if(!empty($_POST['peticion'])){
         case 'getData':
             echo $cgi->executePaisData($_POST['idPais']);
             break;
-        
+        case 'getFecha':
+            echo $cgi->executeGetFecha();
+            break;
+        case 'mapGuide':
+            echo $cgi->executeMapLink();
+            break;
         default:
-            
             break;
     }
 }
