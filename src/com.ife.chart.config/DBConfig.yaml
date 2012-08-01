@@ -6,7 +6,10 @@
 #dbf
 xbase:
   path: ../com.ife.chart.xbases/
-  name: base
+  names: 
+    demo: base
+    uno: 01_IFETEL_oct_a_mayo.dbf
+
 #Base postgres
 base:
   usuario : geek

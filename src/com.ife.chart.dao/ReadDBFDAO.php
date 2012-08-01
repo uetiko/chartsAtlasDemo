@@ -8,9 +8,9 @@ include_once '../com.ife.chart.config/DBConfig.php';
 class ReadDBFDAO{
 	private $dbf;
     private $conf;
-	function __construct() {
+	function __construct($name) {
 		$this->conf = new DBConfig();
-        $this->dbf = new ConnectionXbase($this->conf->getXbasePath(), $this->conf->getXbaseName());
+        $this->dbf = new ConnectionXbase($this->conf->getXbasePath(), $this->conf->getXbases($name));
 	}
     
     /**
@@ -25,6 +25,4 @@ class ReadDBFDAO{
         return $data;
     }
 }
-
-
 ?>

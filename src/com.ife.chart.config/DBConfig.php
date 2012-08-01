@@ -15,7 +15,7 @@ class DBConfig{
     }
     
     public function getXbaseName(){
-        return $this->properties['xbase']['name'];
+        return $this->properties['xbase']['names']['demo'];
     }
     
     public function getUsuarioPostgres(){
@@ -36,6 +36,10 @@ class DBConfig{
     
     public function getBasePostgres(){
         return $this->properties['base']['base'];
+    }
+    
+    public function getXbases($name){
+        return $this->properties['xbase']['names'][$name];
     }
 }
 ?>
