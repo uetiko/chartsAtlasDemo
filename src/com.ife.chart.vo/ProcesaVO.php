@@ -108,15 +108,37 @@ class ProcesaVO {
     public function procesaDFB01Pais() {
         $dao = new ReadDBFDAO('uno');
         $data = $dao -> getDataDbf();
+        $array = array();
         foreach ($data as $key) {
-            if($key['TOTAL_OCT'] != 0){
-                echo utf8_encode($key['NOM_ESPAN'])  ."\n";
-                echo $key['TOTAL_OCT'];
-                echo "\n\n";
+            if ($key['TOTAL_OCT'] != 0) {
+                $array[] = array(utf8_encode($key['NOM_ESPAN']) => $key['TOTAL_OCT']);
             }
-            
-            
+
         }
+    }
+
+    public function procesaDBFOct() {
+        $dao = new ReadDBFDAO();
+        $d = $dao -> getDataDbf();
+        $datos = array();
+        foreach ($d as $key) {
+            if ($key['TOTAL_OCT'] != 0) {
+                $datos[] = array(utf8_encode($key['NOM_ESPAN']) => $key['TOTAL_NOV']);
+            }
+        }
+        return $datos;
+    }
+
+    public function procesaDBFNov(){
+        $dao = new ReadDBFDAO();
+        $d = $dao -> getDataDbf();
+        $datos = array();
+        foreach ($d as $key) {
+            if ($key['TOTAL_NOV'] != 0) {
+                $datos[] = array(utf8_encode($key['NOM_ESPAN']) => $key['TOTAL_NOV']);
+            }
+        }
+        return $datos;
     }
 
 }
