@@ -6,6 +6,7 @@ $test = new JJUtils();
 $pvo = new ProcesaVO();
 
 echo $test->getFechaActual() . "\n";
-echo $pvo->procesaDFB01Pais();
+echo 
+print_r($pvo->procesaDBFMes("DIC"));
 
 ?>
