@@ -6,3 +6,7 @@
 function initEvents(){
 	
 }
+
+function getMapa(){
+	
+}
