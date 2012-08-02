@@ -116,27 +116,21 @@ class ProcesaVO {
 
         }
     }
-
-    public function procesaDBFOct() {
-        $dao = new ReadDBFDAO();
+    /**
+     * Funcion para sacar los totales por mes
+     * @access private
+     * @param $mes mes del cual se quiere sacar los totales por país. Parametros validos: OCT, NOV, DIC, ENE, FEB, MAR, ABR, MAY
+     * @method array procesaDBFMes(string $mes)
+     * @return array
+     */
+    public function procesaDBFMes($mes) {
+        $dao = new ReadDBFDAO('uno');
         $d = $dao -> getDataDbf();
-        $datos = array();
+        $param = "TOTAL_" . $mes;
         foreach ($d as $key) {
-            if ($key['TOTAL_OCT'] != 0) {
-                $datos[] = array(utf8_encode($key['NOM_ESPAN']) => $key['TOTAL_NOV']);
-            }
-        }
-        return $datos;
-    }
-
-    public function procesaDBFNov(){
-        $dao = new ReadDBFDAO();
-        $d = $dao -> getDataDbf();
-        $datos = array();
-        foreach ($d as $key) {
-            if ($key['TOTAL_NOV'] != 0) {
-                $datos[] = array(utf8_encode($key['NOM_ESPAN']) => $key['TOTAL_NOV']);
-            }
+            if ($key[$param] != 0) {
+                $datos[] = array(trim(utf8_encode($key['NOM_ESPAN'])) => $key[$param]);
+            }           
         }
         return $datos;
     }
