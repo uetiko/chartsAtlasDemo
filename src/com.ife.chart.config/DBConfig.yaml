@@ -8,7 +8,7 @@ xbase:
   path: ../com.ife.chart.xbases/
   names: 
     demo: base
-    uno: 01_IFETEL_oct_a_mayo.dbf
+    uno: 01_IFETEL_oct_a_mayo
 
 #Base postgres
 base:
