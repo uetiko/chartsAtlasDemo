@@ -20,6 +20,12 @@ class DashboardAction{
     public function executeSelection(){
         
     }
+    
+    public function executeGraficaPorMesPais($mes){
+        $vo = new ProcesaVO();
+        $json = new Services_JSON();
+        return $json->encode($vo->procesaDBFMes($mes));
+    }
 }
 
 ?>
