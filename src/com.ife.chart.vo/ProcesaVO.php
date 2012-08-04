@@ -127,12 +127,17 @@ class ProcesaVO {
         $dao = new ReadDBFDAO('uno');
         $d = $dao -> getDataDbf();
         $param = "TOTAL_" . $mes;
-        foreach ($d as $key) {
+        foreach($d as $key){
             if ($key[$param] != 0) {
                 $datos[] = array(trim(utf8_encode($key['NOM_ESPAN'])) => $key[$param]);
             }           
         }
         return $datos;
+    }
+    
+    public function procesaMapas(){
+        $dao = new QueryDAO();
+        return $dao->getMapas();
     }
 
 }
