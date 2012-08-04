@@ -28,6 +28,17 @@ class QueryDAO{
         }
         return $data;
     }
+
+    public function getMapas(){
+        $array = array();
+        $this->cnn->openPersistentPgConnection();
+        $select = "select * from tbl_mapas";
+        $result = pg_query($this->cnn->getPgConnection(), $select);
+        while ($row = pg_fetch_array($result)) {
+            $array[] = $row;
+        }
+        return $array;
+    }
 }
 
 ?>
