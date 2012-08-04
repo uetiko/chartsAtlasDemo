@@ -26,6 +26,12 @@ class DashboardAction{
         $json = new Services_JSON();
         return $json->encode($vo->procesaDBFMes($mes));
     }
+    
+    public function executeGetMapas(){
+        $vo = new ProcesaVO();
+        $json = new Services_JSON();
+        return $json->encode($vo->procesaMapas());
+    }
 }
 
 ?>
