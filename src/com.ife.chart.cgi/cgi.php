@@ -21,6 +21,10 @@ if(!empty($_POST['peticion'])){
             $dash = new DashboardAction();
             echo $dash->executeGetMapas();
             break;
+        case 'showMapa':
+            $dash = new DashboardAction();
+            echo $dash->executeMapaPorMes($_POST['idMapa']);
+            break;
         default:
             break;
     }
