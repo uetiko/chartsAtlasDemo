@@ -32,6 +32,12 @@ class DashboardAction{
         $json = new Services_JSON();
         return $json->encode($vo->procesaMapas());
     }
+    
+    public function executeMapaPorMes($idMes){
+        $vo = new ProcesaVO();
+        $json = new Services_JSON();
+        return $json->encode($vo->getMapaPorMes($idMes));
+    }
 }
 
 ?>
