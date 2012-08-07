@@ -39,6 +39,17 @@ class QueryDAO{
         }
         return $array;
     }
+    
+    public function getMapaPath($id){
+        $this->cnn->openPersistentPgConnection();
+        $d = array();
+        $query = "select * from tbl_mapas where mapa_id = '" . $id . "'";
+        $result = pg_query($this->cnn->getPgConnection(), $query);
+        while ($row = pg_fetch_assoc($result)) {
+            $d[] = $row;
+        }
+        return $d;
+    }
 }
 
 ?>

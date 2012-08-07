@@ -139,6 +139,16 @@ class ProcesaVO {
         $dao = new QueryDAO();
         return $dao->getMapas();
     }
+    
+    public function getMapaPorMes($idMapa){
+        $d1 = array();
+        $d2 = array();
+        $dao = new QueryDAO();
+        $d1 = $this->procesaDBFMes(strtoupper($idMapa));
+        $d2 = $dao->getMapaPath($idMapa);
+        $array = array('grafica' => $d1, 'mapaPath' => $d2);
+        return $array;
+    }
 
 }
 ?>
