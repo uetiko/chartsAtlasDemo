@@ -8,5 +8,5 @@ echo $action->executeGetPais() . "\n\n\n\n\n\n\n\n";
 echo $action->executePaisData('29') . "\n\n\n\n\n";
 echo $action->executeMapLink() . "\n";
 
-echo $act->executeGrafica() . "\n\n\n";
+echo "mirad aca pedazo de moco: " . $act->executeMapaPorMes('oct');
 ?>
