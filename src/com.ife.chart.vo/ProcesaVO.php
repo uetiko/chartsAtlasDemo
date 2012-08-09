@@ -116,6 +116,7 @@ class ProcesaVO {
 
         }
     }
+
     /**
      * Funcion para sacar los totales por mes
      * @access private
@@ -126,26 +127,31 @@ class ProcesaVO {
     public function procesaDBFMes($mes) {
         $dao = new ReadDBFDAO('uno');
         $d = $dao -> getDataDbf();
+        $datos;
         $param = "TOTAL_" . $mes;
-        foreach($d as $key){
-            if ($key[$param] != 0) {
-                $datos[] = array(trim(utf8_encode($key['NOM_ESPAN'])) => $key[$param]);
-            }           
+        if ($mes != 'OCTMAY') {
+            foreach ($d as $key) {
+                if ($key[$param] != 0) {
+                    $datos[] = array(trim(utf8_encode($key['NOM_ESPAN'])) => $key[$param]);
+                }
+            }
+        }elseif($mes == 'OCTMAY'){
+            $datos[] = $this->procesaDFB01();
         }
         return $datos;
     }
-    
-    public function procesaMapas(){
+
+    public function procesaMapas() {
         $dao = new QueryDAO();
-        return $dao->getMapas();
+        return $dao -> getMapas();
     }
-    
-    public function getMapaPorMes($idMapa){
+
+    public function getMapaPorMes($idMapa) {
         $d1 = array();
         $d2 = array();
         $dao = new QueryDAO();
-        $d1 = $this->procesaDBFMes(strtoupper($idMapa));
-        $d2 = $dao->getMapaPath($idMapa);
+        $d1 = $this -> procesaDBFMes(strtoupper($idMapa));
+        $d2 = $dao -> getMapaPath($idMapa);
         $array = array('grafica' => $d1, 'mapaPath' => $d2);
         return $array;
     }
