@@ -7,66 +7,142 @@ function initEvents() {
 	setMapas();
 	acordeon();
 	menuMaps();
-	/*getInfoBrowser()
-	setPaisCombo();
-	cmpChange();
-	//chart();*/
+	/*
+	 * getInfoBrowser() setPaisCombo(); cmpChange(); //chart();
+	 */
 }
 
-function acordeon(){
+function acordeon() {
+	$( "#tabs" ).tabs({
+		event: "mouseover"
+	});
 	$('#accordion').accordion({
-		fillSpace: true
+		fillSpace : true
 	});
 	$(function() {
-		$( "#accordionResizer" ).resizable({
-			minHeight: 140,
-			resize: function() {
-				$( "#accordion" ).accordion( "resize" );
+		$("#accordionResizer").resizable({
+			minHeight : 140,
+			resize : function() {
+				$("#accordion").accordion("resize");
 			}
 		});
 	});
 	/*
-	$('.accordion .head').click(function() {
-		$(this).next().toggle('slow');
-		return false;
-	}).next().hide();*/
+	 * $('.accordion .head').click(function() { $(this).next().toggle('slow');
+	 * return false; }).next().hide();
+	 */
 }
 
-
-function menuMaps(){
-	$('label').click(function(){
+function menuMaps() {
+	$('label').click(function() {
 		var algo = $(this);
-		mesId(algo[0].id);
+		var string = new String(algo[0].id);
+		alert(string.toUpperCase());
+		mesId(string);
 	});
 }
 
-function mesId(id){
+function mesId(id) {
 	$.ajax({
 		url : '../../../../src/com.ife.chart.cgi/cgi.php',
-		dataType: 'json',
-		type: 'POST',
+		dataType : 'json',
+		type : 'POST',
 		data : {
 			peticion : true,
 			action : 'showMapa',
-			idMapa : id
+			idMapa : id.toUpperCase()
 		},
-		success : function(response, statusText, jqXHR){
-			alert('response');
+		success : function(response, statusText, jqXHR) {
+			showMapImg(response.mapaPath[0], id);
 		},
-		error : function(response, stautsText, jqXHR){
+		error : function(response, stautsText, jqXHR) {
 			alert('nel, dedicate a otra cosa! ' + statustext)
 		}
 	});
 }
 
+function showMapImg(json, id) {
+	$('#map').html(
+			'<img id="mapa" src="/chartsAtlasDemo/' + json.path + '/' + json.map_name + '" style="height: 595px; width: 900px;"/>');
+	makeJson(json.grafica[0], id);
+}
 
-
-
-function getInfoBrowser(){
+function getInfoBrowser() {
 	var ua = $.browser;
-	  if ( ua.mozilla && ua.version.slice(0,3) == "1.9" ) {
-	    alert( "Do stuff for firefox 3" );
-	  }
+	if (ua.mozilla && ua.version.slice(0, 3) == "1.9") {
+		alert("Do stuff for firefox 3");
+	}
+}
+
+function makeJson(json, opt) {
+	if (opt == 'octMay') {
+		var datos = {
+			reporte : {
+				nombreGrafica : "Mexicanos en el mundo",
+				subnombre : "Número de mexicanos",
+				categories : [ JSON.stringify(json) ],
+				ejeYTitulo : "Lineas",
+				unidadesY : 'Ciudadanos',
+				ejeXTitulo : "Columnas",
+				unidadesX : 'Ciudadanos',
+				valores1 : {
+					nombre : "Ciudadanos",
+					datos : [ num[0], num[1], num[2], num[3], num[4], num[5],
+							num[6], num[7], num[8], num[9], num[10], num[11],
+							num[12], num[13], num[14], num[15], num[16],
+							num[17], num[18], num[19], num[20], num[21],
+							num[22], num[23], num[24], num[25], num[26],
+							num[27], num[28], num[29], num[30] ]
+				},
+				valores2 : {
+					nombre : "undef",
+					datos : [ num[0], num[1], num[2], num[3], num[4], num[5],
+							num[6], num[7], num[8], num[9], num[10], num[11],
+							num[12], num[13], num[14], num[15], num[16],
+							num[17], num[18], num[19], num[20], num[21],
+							num[22], num[23], num[24], num[25], num[26],
+							num[27], num[28], num[29], num[30] ]
+				},
+				totalCiudadanos : "Total de ciudadanos en este pais"
+			}
+		}
+	} else {
+		var datos = {
+			reporte : {
+				nombreGrafica : "Mexicanos en el mundo",
+				subnombre : "Número de mexicanos",
+				categories : [ pais[0], pais[1], pais[3], pais[4], pais[5],
+						pais[6], pais[7], pais[8], pais[9], pais[10], pais[11],
+						pais[12], pais[13], pais[14], pais[15], pais[16],
+						pais[17], pais[18], pais[19], pais[20], pais[21],
+						pais[22], pais[23], pais[24], pais[25], pais[26],
+						pais[27], pais[28], pais[29], pais[30] ],
+				ejeYTitulo : "Lineas",
+				unidadesY : 'Ciudadanos',
+				ejeXTitulo : "Columnas",
+				unidadesX : 'Ciudadanos',
+				valores1 : {
+					nombre : "Ciudadanos",
+					datos : [ num[0], num[1], num[2], num[3], num[4], num[5],
+							num[6], num[7], num[8], num[9], num[10], num[11],
+							num[12], num[13], num[14], num[15], num[16],
+							num[17], num[18], num[19], num[20], num[21],
+							num[22], num[23], num[24], num[25], num[26],
+							num[27], num[28], num[29], num[30] ]
+				},
+				valores2 : {
+					nombre : "undef",
+					datos : [ num[0], num[1], num[2], num[3], num[4], num[5],
+							num[6], num[7], num[8], num[9], num[10], num[11],
+							num[12], num[13], num[14], num[15], num[16],
+							num[17], num[18], num[19], num[20], num[21],
+							num[22], num[23], num[24], num[25], num[26],
+							num[27], num[28], num[29], num[30] ]
+				},
+				totalCiudadanos : "Total de ciudadanos en este pais"
+			}
+		}
+	}
 }
 
 function Chart(pais, num) {
@@ -75,36 +151,51 @@ function Chart(pais, num) {
 	var numeros = JSON.stringify(num);
 	var estados = JSON.stringify(pais);
 	for ( var int = 0; int < pais.length; int++) {
-		if(int != 31){
-			paises = paises + '' +pais[int] + ',';
-		}else{
-			paises = paises + '' +pais[int] + '';
+		if (int != 31) {
+			paises = paises + '' + pais[int] + ',';
+		} else {
+			paises = paises + '' + pais[int] + '';
 		}
 	}
 	for ( var int = 0; int < num.length; int++) {
-		if(int != 31){
-			numbers = numbers +num[int] + ',';
-		}else{
-			numbers = numbers +num[int];
+		if (int != 31) {
+			numbers = numbers + num[int] + ',';
+		} else {
+			numbers = numbers + num[int];
 		}
 	}
-	
+
 	var datos = {
 		reporte : {
 			nombreGrafica : "Mexicanos en el mundo",
 			subnombre : "Número de mexicanos",
-			categories : [pais[0], pais[1], pais[3], pais[4], pais[5], pais[6], pais[7], pais[8], pais[9], pais[10], pais[11], pais[12], pais[13], pais[14], pais[15], pais[16], pais[17], pais[18], pais[19], pais[20], pais[21], pais[22], pais[23], pais[24], pais[25], pais[26], pais[27], pais[28], pais[29], pais[30]],
+			categories : [ pais[0], pais[1], pais[3], pais[4], pais[5],
+					pais[6], pais[7], pais[8], pais[9], pais[10], pais[11],
+					pais[12], pais[13], pais[14], pais[15], pais[16], pais[17],
+					pais[18], pais[19], pais[20], pais[21], pais[22], pais[23],
+					pais[24], pais[25], pais[26], pais[27], pais[28], pais[29],
+					pais[30] ],
 			ejeYTitulo : "Lineas",
 			unidadesY : 'Ciudadanos',
 			ejeXTitulo : "Columnas",
 			unidadesX : 'Ciudadanos',
 			valores1 : {
 				nombre : "Ciudadanos",
-				datos : [num[0], num[1], num[2], num[3], num[4], num[5], num[6], num[7], num[8], num[9], num[10], num[11], num[12], num[13], num[14], num[15], num[16], num[17], num[18], num[19], num[20], num[21], num[22], num[23], num[24], num[25], num[26], num[27], num[28], num[29], num[30]]
+				datos : [ num[0], num[1], num[2], num[3], num[4], num[5],
+						num[6], num[7], num[8], num[9], num[10], num[11],
+						num[12], num[13], num[14], num[15], num[16], num[17],
+						num[18], num[19], num[20], num[21], num[22], num[23],
+						num[24], num[25], num[26], num[27], num[28], num[29],
+						num[30] ]
 			},
 			valores2 : {
 				nombre : "undef",
-				datos : [num[0], num[1], num[2], num[3], num[4], num[5], num[6], num[7], num[8], num[9], num[10], num[11], num[12], num[13], num[14], num[15], num[16], num[17], num[18], num[19], num[20], num[21], num[22], num[23], num[24], num[25], num[26], num[27], num[28], num[29], num[30]]
+				datos : [ num[0], num[1], num[2], num[3], num[4], num[5],
+						num[6], num[7], num[8], num[9], num[10], num[11],
+						num[12], num[13], num[14], num[15], num[16], num[17],
+						num[18], num[19], num[20], num[21], num[22], num[23],
+						num[24], num[25], num[26], num[27], num[28], num[29],
+						num[30] ]
 			},
 			totalCiudadanos : "Total de ciudadanos en este pais"
 		}
@@ -137,10 +228,10 @@ function Chart(pais, num) {
 				xAxis : [ {
 					categories : tmp.categories
 				} ],
-				labels: {
-                    rotation: -45,
-                    align: 'right'
-                },
+				labels : {
+					rotation : -45,
+					align : 'right'
+				},
 				yAxis : [ { // Primary yAxis
 					labels : {
 						formatter : function() {
@@ -253,17 +344,16 @@ function cmpChange() {
 					e++;
 				}
 				for ( var int = 0; int < key.length; int++) {
-					keyEstado[int]= response.estado[key[int]];
-					
+					keyEstado[int] = response.estado[key[int]];
+
 				}
-				
+
 				for ( var int = 0; int < key.length; int++) {
 					num[int] = parseInt(response.numeros[int]);
-					
+
 				}
 				Chart(keyEstado, num);
-				
-				
+
 			},
 			error : function(response, textStatus, jqXHR) {
 				alert(textStatus);
@@ -272,7 +362,7 @@ function cmpChange() {
 	});
 }
 
-function setMapas(){
+function setMapas() {
 	$.ajax({
 		url : '../../../../src/com.ife.chart.cgi/cgi.php',
 		dataType : 'json',
@@ -283,10 +373,10 @@ function setMapas(){
 		},
 		success : function(response, textStatus, jqXHR) {
 			var mapaCmb = $("select#mapaCmb");
-			//alert(response[0][4]);
+			// alert(response[0][4]);
 			mapaCmb.hide();
 			mapaCmb.append(new Option("Selecciona un país"));
-			for(var i = 0; i < response.length; i++){
+			for ( var i = 0; i < response.length; i++) {
 				mapaCmb.append(new Option(response[i][4], response[i][1]));
 			}
 			mapaCmb.show();
@@ -297,9 +387,7 @@ function setMapas(){
 	});
 }
 
-
-
-function setcombo(){
+function setcombo() {
 	$.ajax({
 		url : '../src/com.ife.chart.cgi/cgi.php',
 		dataType : 'json',
@@ -312,8 +400,9 @@ function setcombo(){
 			var paisCmb = $("select#paisCmb");
 			paisCmb.hide();
 			paisCmb.append(new Option("Selecciona un país"));
-			for(var i = 0; i < response.length; i++){
-				paisCmb.append(new Option(response[i].nombre, response[i].idPais));
+			for ( var i = 0; i < response.length; i++) {
+				paisCmb.append(new Option(response[i].nombre,
+						response[i].idPais));
 			}
 			paisCmb.show();
 		},
@@ -321,269 +410,245 @@ function setcombo(){
 			alert(textStatus);
 		}
 	});
-	
-	
+
 }
 
 /**
  * Dark blue theme for Highcharts JS
+ * 
  * @author Torstein Hønsi
  */
 
 Highcharts.theme = {
-   colors: ["#DDDF0D", "#55BF3B", "#DF5353", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", 
-      "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
-   chart: {
-      backgroundColor: {
-         linearGradient: [0, 0, 250, 500],
-         stops: [
-            [0, '#dadada'],
-            [1, '#dadada']
-         ]
-      },
-      borderColor: '#FFFFFF',
-      borderWidth: 0,
-      className: 'dark-container',
-      plotBackgroundColor: '#b2b2b2',
-      plotBorderColor: '#FFFFFF',
-      plotBorderWidth: 1,
-      plotShadow: true
-   },
-   title: {
-      style: {
-         color: '#FFFFFF',
-         font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
-      }
-   },
-   subtitle: {
-      style: { 
-         color: '#666666',
-         font: 'bold 12px "Trebuchet MS", Verdana, sans-serif'
-      }
-   },
-   xAxis: {
-      
-      lineColor: '#A0A0A0',
-      tickColor: '#A0A0A0',
-      title: {
-         style: {
-            color: '#CCC',
-            fontWeight: 'bold',
-            fontSize: '12px',
-            fontFamily: 'Trebuchet MS, Verdana, sans-serif'
+	colors : [ "#DDDF0D", "#55BF3B", "#DF5353", "#7798BF", "#aaeeee",
+			"#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#7798BF", "#aaeeee" ],
+	chart : {
+		backgroundColor : {
+			linearGradient : [ 0, 0, 250, 500 ],
+			stops : [ [ 0, '#dadada' ], [ 1, '#dadada' ] ]
+		},
+		borderColor : '#FFFFFF',
+		borderWidth : 0,
+		className : 'dark-container',
+		plotBackgroundColor : '#b2b2b2',
+		plotBorderColor : '#FFFFFF',
+		plotBorderWidth : 1,
+		plotShadow : true
+	},
+	title : {
+		style : {
+			color : '#FFFFFF',
+			font : 'bold 16px "Trebuchet MS", Verdana, sans-serif'
+		}
+	},
+	subtitle : {
+		style : {
+			color : '#666666',
+			font : 'bold 12px "Trebuchet MS", Verdana, sans-serif'
+		}
+	},
+	xAxis : {
 
-         }            
-      }
-   },
-   yAxis: {
-      gridLineColor: '#ffffff',
-      labels: {
-         style: {
-            color: '#A0A0A0'
-         }
-      },
-      lineColor: '#ffffff',
-      minorTickInterval: null,
-      tickColor: '#ffffff',
-      tickWidth: 1,
-      title: {
-         style: {
-            color: '#ffffff',
-            fontWeight: 'bold',
-            fontSize: '12px',
-            fontFamily: 'Trebuchet MS, Verdana, sans-serif'
-         }            
-      }
-   },
-   legend: {
-      itemStyle: {
-         font: '9pt Trebuchet MS, Verdana, sans-serif',
-         color: '#A0A0A0'
-      }
-   },
-   tooltip: {
-      backgroundColor: 'rgba(0, 0, 0, 0.75)',
-      style: {
-         color: '#F0F0F0'
-      }
-   },
-   toolbar: {
-      itemStyle: { 
-         color: 'silver'
-      }
-   },
-   plotOptions: {
-      line: {
-         dataLabels: {
-            color: '#CCC'
-         },
-         marker: {
-            lineColor: '#333'
-         }
-      },
-      spline: {
-         marker: {
-            lineColor: '#333'
-         }
-      },
-      scatter: {
-         marker: {
-            lineColor: '#333'
-         }
-      },
-      candlestick: {
-         lineColor: 'white'
-      }
-   },      
-   legend: {
-      itemStyle: {
-         color: '#CCC'
-      },
-      itemHoverStyle: {
-         color: '#FFF'
-      },
-      itemHiddenStyle: {
-         color: '#444'
-      }
-   },
-   credits: {
-      style: {
-         color: '#666'
-      }
-   },
-   labels: {
-      style: {
-         color: '#CCC'
-      }
-   },
-   
-   navigation: {
-      buttonOptions: {
-         backgroundColor: {
-            linearGradient: [0, 0, 0, 20],
-            stops: [
-               [0.4, '#606060'],
-               [0.6, '#333333']
-            ]
-         },
-         borderColor: '#000000',
-         symbolStroke: '#C0C0C0',
-         hoverSymbolStroke: '#FFFFFF'
-      }
-   },
-   
-   exporting: {
-      buttons: {
-         exportButton: {
-            symbolFill: '#55BE3B'
-         },
-         printButton: {
-            symbolFill: '#7797BE'
-         }
-      }
-   },
-   
-   // scroll charts
-   rangeSelector: {
-      buttonTheme: {
-         fill: {
-            linearGradient: [0, 0, 0, 20],
-            stops: [
-               [0.4, '#888'],
-               [0.6, '#555']
-            ]
-         },
-         stroke: '#000000',
-         style: {
-            color: '#CCC',
-            fontWeight: 'bold'
-         },
-         states: {
-            hover: {
-               fill: {
-                  linearGradient: [0, 0, 0, 20],
-                  stops: [
-                     [0.4, '#BBB'],
-                     [0.6, '#888']
-                  ]
-               },
-               stroke: '#000000',
-               style: {
-                  color: 'white'
-               }
-            },
-            select: {
-               fill: {
-                  linearGradient: [0, 0, 0, 20],
-                  stops: [
-                     [0.1, '#000'],
-                     [0.3, '#333']
-                  ]
-               },
-               stroke: '#000000',
-               style: {
-                  color: 'yellow'
-               }
-            }
-         }               
-      },
-      inputStyle: {
-         backgroundColor: '#333',
-         color: 'silver'
-      },
-      labelStyle: {
-         color: 'silver'
-      }
-   },
-   
-   navigator: {
-      handles: {
-         backgroundColor: '#666',
-         borderColor: '#AAA'
-      },
-      outlineColor: '#CCC',
-      maskFill: 'rgba(16, 16, 16, 0.5)',
-      series: {
-         color: '#7798BF',
-         lineColor: '#A6C7ED'
-      }
-   },
-   
-   scrollbar: {
-      barBackgroundColor: {
-            linearGradient: [0, 0, 0, 20],
-            stops: [
-               [0.4, '#888'],
-               [0.6, '#555']
-            ]
-         },
-      barBorderColor: '#CCC',
-      buttonArrowColor: '#CCC',
-      buttonBackgroundColor: {
-            linearGradient: [0, 0, 0, 20],
-            stops: [
-               [0.4, '#888'],
-               [0.6, '#555']
-            ]
-         },
-      buttonBorderColor: '#CCC',
-      rifleColor: '#FFF',
-      trackBackgroundColor: {
-         linearGradient: [0, 0, 0, 10],
-         stops: [
-            [0, '#000'],
-            [1, '#333']
-         ]
-      },
-      trackBorderColor: '#666'
-   },
-   
-   // special colors for some of the
-   legendBackgroundColor: 'rgba(0, 0, 0, 0.5)',
-   legendBackgroundColorSolid: 'rgb(35, 35, 70)',
-   dataLabelsColor: '#444',
-   textColor: '#C0C0C0',
-   maskColor: 'rgba(255,255,255,0.3)'
+		lineColor : '#A0A0A0',
+		tickColor : '#A0A0A0',
+		title : {
+			style : {
+				color : '#CCC',
+				fontWeight : 'bold',
+				fontSize : '12px',
+				fontFamily : 'Trebuchet MS, Verdana, sans-serif'
+
+			}
+		}
+	},
+	yAxis : {
+		gridLineColor : '#ffffff',
+		labels : {
+			style : {
+				color : '#A0A0A0'
+			}
+		},
+		lineColor : '#ffffff',
+		minorTickInterval : null,
+		tickColor : '#ffffff',
+		tickWidth : 1,
+		title : {
+			style : {
+				color : '#ffffff',
+				fontWeight : 'bold',
+				fontSize : '12px',
+				fontFamily : 'Trebuchet MS, Verdana, sans-serif'
+			}
+		}
+	},
+	legend : {
+		itemStyle : {
+			font : '9pt Trebuchet MS, Verdana, sans-serif',
+			color : '#A0A0A0'
+		}
+	},
+	tooltip : {
+		backgroundColor : 'rgba(0, 0, 0, 0.75)',
+		style : {
+			color : '#F0F0F0'
+		}
+	},
+	toolbar : {
+		itemStyle : {
+			color : 'silver'
+		}
+	},
+	plotOptions : {
+		line : {
+			dataLabels : {
+				color : '#CCC'
+			},
+			marker : {
+				lineColor : '#333'
+			}
+		},
+		spline : {
+			marker : {
+				lineColor : '#333'
+			}
+		},
+		scatter : {
+			marker : {
+				lineColor : '#333'
+			}
+		},
+		candlestick : {
+			lineColor : 'white'
+		}
+	},
+	legend : {
+		itemStyle : {
+			color : '#CCC'
+		},
+		itemHoverStyle : {
+			color : '#FFF'
+		},
+		itemHiddenStyle : {
+			color : '#444'
+		}
+	},
+	credits : {
+		style : {
+			color : '#666'
+		}
+	},
+	labels : {
+		style : {
+			color : '#CCC'
+		}
+	},
+
+	navigation : {
+		buttonOptions : {
+			backgroundColor : {
+				linearGradient : [ 0, 0, 0, 20 ],
+				stops : [ [ 0.4, '#606060' ], [ 0.6, '#333333' ] ]
+			},
+			borderColor : '#000000',
+			symbolStroke : '#C0C0C0',
+			hoverSymbolStroke : '#FFFFFF'
+		}
+	},
+
+	exporting : {
+		buttons : {
+			exportButton : {
+				symbolFill : '#55BE3B'
+			},
+			printButton : {
+				symbolFill : '#7797BE'
+			}
+		}
+	},
+
+	// scroll charts
+	rangeSelector : {
+		buttonTheme : {
+			fill : {
+				linearGradient : [ 0, 0, 0, 20 ],
+				stops : [ [ 0.4, '#888' ], [ 0.6, '#555' ] ]
+			},
+			stroke : '#000000',
+			style : {
+				color : '#CCC',
+				fontWeight : 'bold'
+			},
+			states : {
+				hover : {
+					fill : {
+						linearGradient : [ 0, 0, 0, 20 ],
+						stops : [ [ 0.4, '#BBB' ], [ 0.6, '#888' ] ]
+					},
+					stroke : '#000000',
+					style : {
+						color : 'white'
+					}
+				},
+				select : {
+					fill : {
+						linearGradient : [ 0, 0, 0, 20 ],
+						stops : [ [ 0.1, '#000' ], [ 0.3, '#333' ] ]
+					},
+					stroke : '#000000',
+					style : {
+						color : 'yellow'
+					}
+				}
+			}
+		},
+		inputStyle : {
+			backgroundColor : '#333',
+			color : 'silver'
+		},
+		labelStyle : {
+			color : 'silver'
+		}
+	},
+
+	navigator : {
+		handles : {
+			backgroundColor : '#666',
+			borderColor : '#AAA'
+		},
+		outlineColor : '#CCC',
+		maskFill : 'rgba(16, 16, 16, 0.5)',
+		series : {
+			color : '#7798BF',
+			lineColor : '#A6C7ED'
+		}
+	},
+
+	scrollbar : {
+		barBackgroundColor : {
+			linearGradient : [ 0, 0, 0, 20 ],
+			stops : [ [ 0.4, '#888' ], [ 0.6, '#555' ] ]
+		},
+		barBorderColor : '#CCC',
+		buttonArrowColor : '#CCC',
+		buttonBackgroundColor : {
+			linearGradient : [ 0, 0, 0, 20 ],
+			stops : [ [ 0.4, '#888' ], [ 0.6, '#555' ] ]
+		},
+		buttonBorderColor : '#CCC',
+		rifleColor : '#FFF',
+		trackBackgroundColor : {
+			linearGradient : [ 0, 0, 0, 10 ],
+			stops : [ [ 0, '#000' ], [ 1, '#333' ] ]
+		},
+		trackBorderColor : '#666'
+	},
+
+	// special colors for some of the
+	legendBackgroundColor : 'rgba(0, 0, 0, 0.5)',
+	legendBackgroundColorSolid : 'rgb(35, 35, 70)',
+	dataLabelsColor : '#444',
+	textColor : '#C0C0C0',
+	maskColor : 'rgba(255,255,255,0.3)'
 };
 
 // Apply the theme
