@@ -9,7 +9,8 @@ $pvo = new ProcesaVO();
 
 echo $test->getFechaActual() . "\n";
 //print_r($pvo->procesaDBFMes("octMay"));
-print_r(GraficaTipoUtils::tagsGraficas("hola", "subNombre", "ejeY", "ejeX", "unidadesY", "unidadesX", "valNombre1", "valNombre2"));
+//
+/*print_r(GraficaTipoUtils::tagsGraficas("hola", "subNombre", "ejeY", "ejeX", "unidadesY", "unidadesX", "valNombre1", "valNombre2"));
 $json = new Services_JSON();
 echo "\n\n";
 $c = GraficaTipoUtils::tagsGraficas("hola", "subNombre", "ejeY", "ejeX", "unidadesY", "unidadesX", "valNombre1", "valNombre2");
@@ -18,7 +19,7 @@ foreach ($c as $key) {
 	foreach ($key as $value) {
 		$d[] = $value;
 	}
-}
-echo $json->encode($d);
-
+}*/
+//echo $json->encode($d);
+print_r($pvo->getMapaPorMes("OCTMAY", array("hola"=> "hola", array("adios"=> "chao"))));
 ?>

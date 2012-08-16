@@ -22,6 +22,23 @@ class JJUtils{
     public function getFormat(){
         
     }
+    
+    static public function getTags(){
+        
+    }
+    
+    static public function getMeses(){
+        return array(
+            'OCT' => 'Octubre',
+            'NOV' => 'Noviembre',
+            'DIC' => 'Diciempre',
+            'ENE' => 'Enero',
+            'FEB' => 'Febrero',
+            'MAR' => 'Marzo',
+            'ABR' => 'abril',
+            'MAY' => 'Mayo'
+        );
+    }
 }
 
 ?>
