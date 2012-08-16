@@ -30,7 +30,11 @@ class ConnectionXbase{
     }
     
     public function getHeadersDBF(){
-        $this->headers = dbase_get_record_with_names($identifier, $record);
+        try{
+            $this->headers = dbase_get_record_with_names($identifier, $record);
+        }catch(exception $e){
+            echo $e->getTrace();
+        }
     }
     
     public function getRecordNumber(){
@@ -39,8 +43,12 @@ class ConnectionXbase{
     
     public function getDataArray($number){
         $array = array();
+        try{
         for($i = 0; $i <= $number; $i++){
             $array[] = dbase_get_record_with_names($this->xdb, $i);
+        }
+        }catch(exception $e){
+            echo "error: " . $e->getTrace();
         }
         return $array;
     }

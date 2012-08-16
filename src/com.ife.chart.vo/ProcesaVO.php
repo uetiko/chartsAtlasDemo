@@ -1,6 +1,7 @@
 <?php
 include_once '../com.ife.chart.dao/ReadDBFDAO.php';
 include_once '../com.ife.chart.dao/QueryDAO.php';
+include_once '../com.ife.chart.utils/GraficaTipoUtils.php';
 
 /**
  * Clase de VO para el procesamiento de datos comunes
@@ -147,13 +148,23 @@ class ProcesaVO {
     }
 
     public function getMapaPorMes($idMapa) {
-        $d1 = array();
-        $d2 = array();
         $dao = new QueryDAO();
-        $d1 = $this -> procesaDBFMes(strtoupper($idMapa));
-        $d2 = $dao -> getMapaPath($idMapa);
-        $array = array('grafica' => $d1, 'mapaPath' => $d2);
-        return $array;
+        try{
+            return array('grafica' => $this->procesaDBFMes($idMapa), 'meses' => JJUtils::getMeses(), 'mapaPath' => $dao->getMapaPath($idMapa));
+        }catch(exception $e){
+            //echo "error en el método\n\n";
+            return array('error' => $e->getTrace());
+        }
+    }
+    
+    public function procesaTipoGrafica($id, array $datos1, array $datos2){
+        $arrayProcesado = array();
+        if ($id == 'OCTMAY') {
+            return GraficaTipoUtils::datosGraficaOctMay($datos1, $datos2);
+        } else {
+            return GraficaTipoUtils::datosGraficaPorMes($datos1, $datos2);
+        }
+        
     }
 
 }
