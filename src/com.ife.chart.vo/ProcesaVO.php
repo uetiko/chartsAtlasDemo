@@ -146,13 +146,18 @@ class ProcesaVO {
         $dao = new QueryDAO();
         return $dao -> getMapas();
     }
-
+    /**
+     * Funcion para sacar los totales por mes
+     * @access public
+     * @param $idMapa Parametros validos: OCT, NOV, DIC, ENE, FEB, MAR, ABR, MAY
+     * @method array getMapaPorMes(string $idMapa)
+     * @return array
+     */
     public function getMapaPorMes($idMapa) {
         $dao = new QueryDAO();
         try{
             return array('grafica' => $this->procesaDBFMes($idMapa), 'meses' => JJUtils::getMeses(), 'mapaPath' => $dao->getMapaPath($idMapa));
         }catch(exception $e){
-            //echo "error en el método\n\n";
             return array('error' => $e->getTrace());
         }
     }
