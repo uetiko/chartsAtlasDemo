@@ -26,6 +26,7 @@ class QueryDAO {
         while ($row = pg_fetch_array($result)) {
             $data[] = $row;
         }
+        $this->cnn->closeCnnPg();
         return $data;
     }
 
@@ -37,6 +38,7 @@ class QueryDAO {
         while ($row = pg_fetch_array($result)) {
             $array[] = $row;
         }
+        $this->cnn->closeCnnPg();
         return $array;
     }
 
@@ -50,8 +52,10 @@ class QueryDAO {
                 $d[] = $row;
             }
         } catch(exception $e) {
+            $this->cnn->closeCnnPg();
             return array('error' => $e -> getTrace());
         }
+        $this->cnn->closeCnnPg();
         return $d;
     }
 
