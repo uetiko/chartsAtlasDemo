@@ -3,26 +3,30 @@ include '../com.ife.chart.dao/ConnectionXbase.php';
 include_once '../com.ife.chart.config/DBConfig.php';
 
 /**
- * 
+ *
  */
-class ReadDBFDAO{
-	private $dbf;
+class ReadDBFDAO {
+    private $dbf;
     private $conf;
-	function __construct($name) {
-		$this->conf = new DBConfig();
-        $this->dbf = new ConnectionXbase($this->conf->getXbasePath(), $this->conf->getXbases($name));
-	}
-    
+    function __construct($name) {
+        $this -> conf = new DBConfig();
+        $this -> dbf = new ConnectionXbase($this -> conf -> getXbasePath(), $this -> conf -> getXbases($name));
+    }
+
     /**
      * @return array
      */
-    public function getDataDbf(){
+    public function getDataDbf() {
         $data = array();
-        $this->dbf->openDBF();
-        $num = $this->dbf->getRecordNumber();
-        $data = $this->dbf->getDataArray($num);
-        $this->dbf->closeDBF();
+        try {
+            $this -> dbf -> openDBF();
+            $data = $this -> dbf -> getDataArray($this -> dbf -> getRecordNumber());
+            $this -> dbf -> closeDBF();
+        } catch(exception $e) {
+            $e -> getTrace();
+        }
         return $data;
     }
+
 }
 ?>
