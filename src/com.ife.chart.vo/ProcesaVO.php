@@ -129,17 +129,29 @@ class ProcesaVO {
         $dao = new ReadDBFDAO('uno');
         $d = $dao -> getDataDbf();
         $datos;
+        $dato = array();
+        $keys = array();
+        $hash = array();
         $param = "TOTAL_" . $mes;
         if ($mes != 'OCTMAY') {
             foreach ($d as $key) {
                 if ($key[$param] != 0) {
-                    $datos[] = array(trim(utf8_encode($key['NOM_ESPAN'])) => $key[$param]);
+                    //$datos[] = array(trim(utf8_encode($key['NOM_ESPAN'])) => $key[$param]);
+                    $keys[] = trim(utf8_encode($key['NOM_ESPAN']));
+                    $dato[] = $key[$param];
                 }
             }
         }elseif($mes == 'OCTMAY'){
             $datos[] = $this->procesaDFB01();
+            $arrayKey[] = array_keys($datos[0]);
+            foreach ($datos[0] as $key) {
+                $dato[] = $key;
+            }
+            foreach ($arrayKey[0] as $key) {
+                $keys[] = $key;
+            }
         }
-        return $datos;
+        return array("clave" => $keys, "valor" => $dato);
     }
 
     public function procesaMapas() {
