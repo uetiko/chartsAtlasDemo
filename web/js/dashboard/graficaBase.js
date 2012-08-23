@@ -1,6 +1,7 @@
 /**
  * @author Angel Barrientos uetiko@gmail.com
- * 
+ * @license http://www.gnu.org/copyleft/lesser.html Distributed under the Lesser General Public License (LGPL)
+ * @copyright 2012
  */
 
 function initEvents() {
@@ -54,6 +55,8 @@ function mesId(id) {
 		},
 		success : function(response, statusText, jqXHR) {
 			showMapImg(response.mapaPath[0], id);
+			var datos = makeJson(response.grafica, id);
+			Chart(datos);
 		},
 		error : function(response, stautsText, jqXHR) {
 			alert('nel, dedicate a otra cosa! ' + statustext)
@@ -64,7 +67,6 @@ function mesId(id) {
 function showMapImg(json, id) {
 	$('#map').html(
 			'<img id="mapa" src="/chartsAtlasDemo/' + json.path + '/' + json.map_name + '" style="height: 595px; width: 900px;"/>');
-	makeJson(json.grafica[0], id);
 }
 
 function getInfoBrowser() {
@@ -75,136 +77,62 @@ function getInfoBrowser() {
 }
 
 function makeJson(json, opt) {
+	var datos;
 	if (opt == 'octMay') {
-		var datos = {
+		datos = {
 			reporte : {
 				nombreGrafica : "Mexicanos en el mundo",
 				subnombre : "Número de mexicanos",
-				categories : [ JSON.stringify(json) ],
+				categories : [ json.clave ],
 				ejeYTitulo : "Lineas",
 				unidadesY : 'Ciudadanos',
 				ejeXTitulo : "Columnas",
 				unidadesX : 'Ciudadanos',
 				valores1 : {
 					nombre : "Ciudadanos",
-					datos : [ num[0], num[1], num[2], num[3], num[4], num[5],
-							num[6], num[7], num[8], num[9], num[10], num[11],
-							num[12], num[13], num[14], num[15], num[16],
-							num[17], num[18], num[19], num[20], num[21],
-							num[22], num[23], num[24], num[25], num[26],
-							num[27], num[28], num[29], num[30] ]
+					datos : [ json.valor ]
 				},
 				valores2 : {
 					nombre : "undef",
-					datos : [ num[0], num[1], num[2], num[3], num[4], num[5],
-							num[6], num[7], num[8], num[9], num[10], num[11],
-							num[12], num[13], num[14], num[15], num[16],
-							num[17], num[18], num[19], num[20], num[21],
-							num[22], num[23], num[24], num[25], num[26],
-							num[27], num[28], num[29], num[30] ]
+					datos : [  ]
 				},
 				totalCiudadanos : "Total de ciudadanos en este pais"
 			}
 		}
 	} else {
-		var datos = {
+		datos = {
 			reporte : {
 				nombreGrafica : "Mexicanos en el mundo",
 				subnombre : "Número de mexicanos",
-				categories : [ pais[0], pais[1], pais[3], pais[4], pais[5],
-						pais[6], pais[7], pais[8], pais[9], pais[10], pais[11],
-						pais[12], pais[13], pais[14], pais[15], pais[16],
-						pais[17], pais[18], pais[19], pais[20], pais[21],
-						pais[22], pais[23], pais[24], pais[25], pais[26],
-						pais[27], pais[28], pais[29], pais[30] ],
+				categories : [ json.clave ],
 				ejeYTitulo : "Lineas",
 				unidadesY : 'Ciudadanos',
 				ejeXTitulo : "Columnas",
 				unidadesX : 'Ciudadanos',
 				valores1 : {
 					nombre : "Ciudadanos",
-					datos : [ num[0], num[1], num[2], num[3], num[4], num[5],
-							num[6], num[7], num[8], num[9], num[10], num[11],
-							num[12], num[13], num[14], num[15], num[16],
-							num[17], num[18], num[19], num[20], num[21],
-							num[22], num[23], num[24], num[25], num[26],
-							num[27], num[28], num[29], num[30] ]
+					datos : [ json.valor ]
 				},
 				valores2 : {
 					nombre : "undef",
-					datos : [ num[0], num[1], num[2], num[3], num[4], num[5],
-							num[6], num[7], num[8], num[9], num[10], num[11],
-							num[12], num[13], num[14], num[15], num[16],
-							num[17], num[18], num[19], num[20], num[21],
-							num[22], num[23], num[24], num[25], num[26],
-							num[27], num[28], num[29], num[30] ]
+					datos : [  ]
 				},
 				totalCiudadanos : "Total de ciudadanos en este pais"
 			}
 		}
 	}
+	return datos;
 }
 
-function Chart(pais, num) {
+function Chart(datos) {
 	var paises = new String();
 	var numbers;
-	var numeros = JSON.stringify(num);
-	var estados = JSON.stringify(pais);
-	for ( var int = 0; int < pais.length; int++) {
-		if (int != 31) {
-			paises = paises + '' + pais[int] + ',';
-		} else {
-			paises = paises + '' + pais[int] + '';
-		}
-	}
-	for ( var int = 0; int < num.length; int++) {
-		if (int != 31) {
-			numbers = numbers + num[int] + ',';
-		} else {
-			numbers = numbers + num[int];
-		}
-	}
-
-	var datos = {
-		reporte : {
-			nombreGrafica : "Mexicanos en el mundo",
-			subnombre : "Número de mexicanos",
-			categories : [ pais[0], pais[1], pais[3], pais[4], pais[5],
-					pais[6], pais[7], pais[8], pais[9], pais[10], pais[11],
-					pais[12], pais[13], pais[14], pais[15], pais[16], pais[17],
-					pais[18], pais[19], pais[20], pais[21], pais[22], pais[23],
-					pais[24], pais[25], pais[26], pais[27], pais[28], pais[29],
-					pais[30] ],
-			ejeYTitulo : "Lineas",
-			unidadesY : 'Ciudadanos',
-			ejeXTitulo : "Columnas",
-			unidadesX : 'Ciudadanos',
-			valores1 : {
-				nombre : "Ciudadanos",
-				datos : [ num[0], num[1], num[2], num[3], num[4], num[5],
-						num[6], num[7], num[8], num[9], num[10], num[11],
-						num[12], num[13], num[14], num[15], num[16], num[17],
-						num[18], num[19], num[20], num[21], num[22], num[23],
-						num[24], num[25], num[26], num[27], num[28], num[29],
-						num[30] ]
-			},
-			valores2 : {
-				nombre : "undef",
-				datos : [ num[0], num[1], num[2], num[3], num[4], num[5],
-						num[6], num[7], num[8], num[9], num[10], num[11],
-						num[12], num[13], num[14], num[15], num[16], num[17],
-						num[18], num[19], num[20], num[21], num[22], num[23],
-						num[24], num[25], num[26], num[27], num[28], num[29],
-						num[30] ]
-			},
-			totalCiudadanos : "Total de ciudadanos en este pais"
-		}
-	}
+	
 	var jsonVar;
 	var totalMencion = 0;
 	var totalTiempo = 0;
 	var tmp = datos.reporte;
-	var size = datos.reporte.valores1.datos.length;
+	var size = datos.reporte.valores1.datos[0].length;
 	for ( var i = 0; i < size; i++) {
 		totalMencion = totalMencion + parseInt(datos.reporte.valores1.datos[i]);
 		totalTiempo = totalTiempo + parseInt(datos.reporte.valores2.datos[i]);
@@ -226,7 +154,7 @@ function Chart(pais, num) {
 					}
 				},
 				xAxis : [ {
-					categories : tmp.categories
+					categories : tmp.categories[0]
 				} ],
 				labels : {
 					rotation : -45,
@@ -311,13 +239,13 @@ function Chart(pais, num) {
 					type : 'column',
 					stack : 'partidos',
 					yAxis : 1,
-					data : tmp.valores1.datos
+					data : tmp.valores1.datos[0]
 				}, {
 					name : tmp.ejeYTitulo,
 					color : '#bf7548',
 					type : 'spline',
 					stack : 'tiempos',
-					data : tmp.valores2.datos
+					data : tmp.valores1.datos[0]
 				} ]
 			});
 }
