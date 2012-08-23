@@ -168,7 +168,7 @@ class ProcesaVO {
     public function getMapaPorMes($idMapa) {
         $dao = new QueryDAO();
         try{
-            return array('grafica' => $this->procesaDBFMes($idMapa), 'meses' => JJUtils::getMeses(), 'mapaPath' => $dao->getMapaPath($idMapa));
+            return array('grafica' => $this->procesaDBFMes($idMapa), 'mapaPath' => $dao->getMapaPath($idMapa));
         }catch(exception $e){
             return array('error' => $e->getTrace());
         }
